@@ -3515,20 +3515,19 @@ dependencies = [
 
 [[package]]
 name = "metrics"
-version = "0.13.0-alpha.8"
+version = "0.13.0-alpha.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f059a62fe88c33ee501116c762d8d1da5a69b8ea33a938ac6918af9b135b56a"
+checksum = "efcf562c6940683fdd0dad97c99a0cef222d3738283d3396a735e8d21190e685"
 dependencies = [
  "metrics-macros",
- "once_cell",
  "proc-macro-hack",
 ]
 
 [[package]]
 name = "metrics-macros"
-version = "0.1.0-alpha.5"
+version = "0.1.0-alpha.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "64523162f5087a5268890e572caedb44c060f37252497fa144f4d91fe517e777"
+checksum = "0197e48db63aa8c28f9fbae021585b8f1b299a0b21640cf98853211ac39eb294"
 dependencies = [
  "lazy_static",
  "proc-macro-hack",
@@ -3554,17 +3553,20 @@ dependencies = [
 
 [[package]]
 name = "metrics-util"
-version = "0.4.0-alpha.6"
+version = "0.4.0-alpha.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "938d428ecdc2dc9a6ed8a8da2e6aefc6ee70ab7e26cfc68996a13cc560bced9c"
+checksum = "ee65f4f3f55b356086562ebfe47e76b61de5ed305ae86f1b65fb7f068f8b1546"
 dependencies = [
- "arc-swap",
+ "aho-corasick",
  "atomic-shim",
  "crossbeam-epoch 0.9.0",
  "crossbeam-utils 0.8.0",
  "dashmap",
  "indexmap",
  "metrics",
+ "parking_lot 0.11.1",
+ "quanta",
+ "sketches-ddsketch",
 ]
 
 [[package]]
@@ -4682,6 +4684,21 @@ dependencies = [
  "tokio-native-tls",
  "tokio-util",
  "url",
+]
+
+[[package]]
+name = "quanta"
+version = "0.6.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b9a7776952c6405aab84c51621523a5e053aa6fd63c8f8e8eeaaed79ad6d2dc"
+dependencies = [
+ "atomic-shim",
+ "ctor",
+ "libc",
+ "mach",
+ "once_cell",
+ "raw-cpuid 8.1.1",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -5898,6 +5915,12 @@ name = "simpl"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a30f10c911c0355f80f1c2faa8096efc4a58cdf8590b954d5b395efa071c711"
+
+[[package]]
+name = "sketches-ddsketch"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "76a77a8fd93886010f05e7ea0720e569d6d16c65329dbe3ec033bbbccccb017b"
 
 [[package]]
 name = "slab"
