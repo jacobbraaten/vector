@@ -47,6 +47,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f6789e291be47ace86a60303502173d84af8327e3627ecf334356ee0f87a164c"
 
 [[package]]
+name = "ahash"
+version = "0.7.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f200cbb1e856866d9eade941cf3aa0c5d7dd36f74311c4273b494f4ef036957"
+dependencies = [
+ "getrandom 0.2.0",
+ "once_cell",
+ "version_check 0.9.2",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "0.7.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1475,6 +1486,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "dashmap"
+version = "4.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e77a43b28d0668df09411cb0bc9a8c2adc40f9a048afe863e05fd43251e8e39c"
+dependencies = [
+ "cfg-if 1.0.0",
+ "num_cpus",
+]
+
+[[package]]
 name = "data-encoding"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1824,7 +1845,7 @@ dependencies = [
  "bytes 0.5.6",
  "chrono",
  "crc",
- "dashmap",
+ "dashmap 3.11.10",
  "flate2",
  "futures 0.3.5",
  "glob 0.3.0",
@@ -2353,6 +2374,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "hashbrown"
+version = "0.11.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab5ef0d4909ef3724cc8cce6ccc8572c5c817592e9285f5464f8e86f8bd3726e"
+dependencies = [
+ "ahash 0.7.2",
+]
+
+[[package]]
 name = "headers"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2783,7 +2813,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "55e2e4c765aa53a0424761bf9f41aa7a6ac1efa87238f59560640e27fca028f2"
 dependencies = [
  "autocfg 1.0.1",
- "hashbrown",
+ "hashbrown 0.9.1",
  "serde",
 ]
 
@@ -3224,7 +3254,7 @@ version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "be716eb6878ca2263eb5d00a781aa13264a794f519fe6af4fbb2668b2d5441c0"
 dependencies = [
- "hashbrown",
+ "hashbrown 0.9.1",
 ]
 
 [[package]]
@@ -3519,9 +3549,20 @@ version = "0.13.0-alpha.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f059a62fe88c33ee501116c762d8d1da5a69b8ea33a938ac6918af9b135b56a"
 dependencies = [
- "metrics-macros",
+ "metrics-macros 0.1.0-alpha.5",
  "once_cell",
  "proc-macro-hack",
+]
+
+[[package]]
+name = "metrics"
+version = "0.15.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c53c23fff9a59f261498953cf41dc9ffc2522fd79723bdf283c1e88dc1633624"
+dependencies = [
+ "metrics-macros 0.3.0",
+ "proc-macro-hack",
+ "t1ha",
 ]
 
 [[package]]
@@ -3539,14 +3580,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "metrics-macros"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b22572ba9964744e261d34553568683b76db277bcd309ebf7215e28e0982505d"
+dependencies = [
+ "lazy_static",
+ "proc-macro-hack",
+ "proc-macro2 1.0.24",
+ "quote 1.0.7",
+ "regex",
+ "syn 1.0.53",
+]
+
+[[package]]
 name = "metrics-tracing-context"
 version = "0.1.0-alpha.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "22957a1b4e095d61efe0a84ffcdae8e04d64f8b7978d54dd99ccef58699dfbb0"
 dependencies = [
  "itoa",
- "metrics",
- "metrics-util",
+ "metrics 0.13.0-alpha.8",
+ "metrics-util 0.4.0-alpha.8",
  "tracing 0.1.21",
  "tracing-core 0.1.17",
  "tracing-subscriber",
@@ -3554,17 +3609,40 @@ dependencies = [
 
 [[package]]
 name = "metrics-util"
-version = "0.4.0-alpha.6"
+version = "0.4.0-alpha.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "938d428ecdc2dc9a6ed8a8da2e6aefc6ee70ab7e26cfc68996a13cc560bced9c"
+checksum = "e176b573aa63b9dd030df3a01eb49a382de35e37c459fc131cf342f978f4a8fa"
 dependencies = [
- "arc-swap",
  "atomic-shim",
  "crossbeam-epoch 0.9.0",
  "crossbeam-utils 0.8.0",
- "dashmap",
+ "dashmap 3.11.10",
  "indexmap",
- "metrics",
+ "metrics 0.13.0-alpha.8",
+ "parking_lot 0.11.1",
+ "quanta 0.6.5",
+]
+
+[[package]]
+name = "metrics-util"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6586f4c52af81a3f7832cf0bc86141d2fca7207bedd09fdd3f7da60c8dcd0c4a"
+dependencies = [
+ "aho-corasick",
+ "atomic-shim",
+ "crossbeam-epoch 0.9.0",
+ "crossbeam-utils 0.8.0",
+ "dashmap 4.0.2",
+ "hashbrown 0.11.2",
+ "indexmap",
+ "metrics 0.15.1",
+ "num_cpus",
+ "ordered-float 2.0.0",
+ "parking_lot 0.11.1",
+ "quanta 0.7.2",
+ "sketches-ddsketch",
+ "t1ha",
 ]
 
 [[package]]
@@ -4685,6 +4763,36 @@ dependencies = [
 ]
 
 [[package]]
+name = "quanta"
+version = "0.6.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b9a7776952c6405aab84c51621523a5e053aa6fd63c8f8e8eeaaed79ad6d2dc"
+dependencies = [
+ "atomic-shim",
+ "ctor",
+ "libc",
+ "mach",
+ "once_cell",
+ "raw-cpuid 8.1.1",
+ "winapi 0.3.9",
+]
+
+[[package]]
+name = "quanta"
+version = "0.7.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e76a3afdefd0ce2c0363bf3146271e947782240ea617885dd64e56c4de9fb3c9"
+dependencies = [
+ "atomic-shim",
+ "ctor",
+ "libc",
+ "mach",
+ "once_cell",
+ "raw-cpuid 9.0.0",
+ "winapi 0.3.9",
+]
+
+[[package]]
 name = "quick-error"
 version = "1.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4943,6 +5051,15 @@ dependencies = [
  "bitflags",
  "cc",
  "rustc_version",
+]
+
+[[package]]
+name = "raw-cpuid"
+version = "9.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c27cb5785b85bd05d4eb171556c9a1a514552e26123aeae6bb7d811353148026"
+dependencies = [
+ "bitflags",
 ]
 
 [[package]]
@@ -5900,6 +6017,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a30f10c911c0355f80f1c2faa8096efc4a58cdf8590b954d5b395efa071c711"
 
 [[package]]
+name = "sketches-ddsketch"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "76a77a8fd93886010f05e7ea0720e569d6d16c65329dbe3ec033bbbccccb017b"
+
+[[package]]
 name = "slab"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6252,6 +6375,18 @@ checksum = "bc84750f2634660415240f7ab6c67022b79d3eccdd9c8f6b969d95e5e409a2c5"
 dependencies = [
  "chrono",
  "nom 5.1.2",
+]
+
+[[package]]
+name = "t1ha"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fa44aa51ae1a544e2c35a38831ba54ae40591f21384816f531b84f3e984b9ccc"
+dependencies = [
+ "cfg-if 0.1.10",
+ "lazy_static",
+ "num-traits",
+ "rustc_version",
 ]
 
 [[package]]
@@ -7187,9 +7322,9 @@ dependencies = [
  "matches",
  "maxminddb",
  "md-5 0.9.1",
- "metrics",
+ "metrics 0.13.0-alpha.8",
  "metrics-tracing-context",
- "metrics-util",
+ "metrics-util 0.7.0",
  "mongodb",
  "nats",
  "nix 0.19.1",
